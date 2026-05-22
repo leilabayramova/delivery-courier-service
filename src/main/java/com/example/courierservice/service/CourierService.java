@@ -70,15 +70,5 @@ public class CourierService {
         if (currentStatus == nextStatus) {
             throw new InvalidCourierStatusException("Courier is already " + nextStatus);
         }
-
-        boolean isValidTransition =
-                currentStatus == CourierStatus.AVAILABLE && nextStatus == CourierStatus.ON_DELIVERY
-                        || currentStatus == CourierStatus.ON_DELIVERY && nextStatus == CourierStatus.AVAILABLE;
-
-        if (!isValidTransition) {
-            throw new InvalidCourierStatusException(
-                    "Invalid courier status transition: " + currentStatus + " -> " + nextStatus
-            );
-        }
     }
 }
