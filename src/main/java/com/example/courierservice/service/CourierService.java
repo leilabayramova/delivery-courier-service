@@ -71,4 +71,22 @@ public class CourierService {
             throw new InvalidCourierStatusException("Courier is already " + nextStatus);
         }
     }
+
+    public void markCourierAsOnDelivery(Long courierId) {
+        CourierEntity courier = findCourierById(courierId);
+
+        validateStatusTransition(courier.getStatus(), CourierStatus.ON_DELIVERY);
+
+        courier.setStatus(CourierStatus.ON_DELIVERY);
+        courierRepository.save(courier);
+    }
+
+    public void markCourierAsAvailable(Long courierId) {
+        CourierEntity courier = findCourierById(courierId);
+
+        validateStatusTransition(courier.getStatus(), CourierStatus.AVAILABLE);
+
+        courier.setStatus(CourierStatus.AVAILABLE);
+        courierRepository.save(courier);
+    }
 }
